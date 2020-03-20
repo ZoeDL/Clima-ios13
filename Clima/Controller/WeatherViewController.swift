@@ -26,13 +26,23 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     }
     // hide keyboard when enter key is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchBar.endEditing(true)
+        textField.endEditing(true)
         return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.text != "" {
+            return true
+        } else {
+            textField.placeholder = "Please enter a city name"
+            return false
+        }
     }
     
     // clear the user input
     func textFieldDidEndEditing(_ textField: UITextField) {
-        searchBar.text = ""
+        textField.text = ""
+        textField.placeholder = "Search"
     }
 }
 
