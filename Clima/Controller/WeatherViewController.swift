@@ -20,7 +20,6 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         searchBar.delegate = self
     }
 
-
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         searchBar.endEditing(true)
     }
