@@ -14,6 +14,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchBar: UITextField!
+    var weatherManager = WeatherManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +39,11 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // clear the user input
+    // get the user input for fetching weather data and then clear it
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if let cityName = textField.text {
+            weatherManager.fetchWeatherData(cityName: cityName)
+        }
         textField.text = ""
         textField.placeholder = "Search"
     }
