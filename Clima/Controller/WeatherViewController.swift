@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+class WeatherViewController: UIViewController {
 
     @IBOutlet weak var conditionImageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -21,7 +21,9 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         searchBar.delegate = self
         weatherManager.delegate = self
     }
+}
 
+extension WeatherViewController: UITextFieldDelegate {
     @IBAction func searchButtonPressed(_ sender: UIButton) {
         searchBar.endEditing(true)
     }
@@ -48,7 +50,9 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         textField.text = ""
         textField.placeholder = "Search"
     }
-    
+}
+
+extension WeatherViewController: WeatherManagerDelegate {
     func weatherDataDidUpdate(_ weatherManager: WeatherManager,  weatherModel: WeatherModel) {
         // Dispatch the call to update the label text to the main thread.
         DispatchQueue.main.async {
