@@ -26,6 +26,10 @@ class WeatherViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
     }
+
+    @IBAction func currentLocationTapped(_ sender: UIButton) {
+        locationManager.requestLocation()
+    }
 }
 
 extension WeatherViewController: UITextFieldDelegate {
@@ -76,10 +80,10 @@ extension WeatherViewController: WeatherManagerDelegate {
 extension WeatherViewController:  CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
+            locationManager.stopUpdatingLocation()
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
-            print(lat)
-            print(lon)
+            weatherManager.fetchWeatherData(latitude: lat, longtitude: lon)
         }
     }
 
